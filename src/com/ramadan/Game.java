@@ -9,17 +9,24 @@ public class Game extends Canvas implements Runnable {
 
 	private static final long serialVersionUID = -978257958772857869L;
 
-	final int WIDTH = 1280, HEIGHT = 720;
+	static final int WIDTH = 1280, HEIGHT = 720;
 	final String NAME = "Dodge Game";
 	
 	private Thread thread;
 	private boolean running = false;
+	
+	private Handler handler;
 	
 	/**
 	 * Instantiate a game object that creates a window containing this game instance.
 	 */
 	public Game() {
 		new Window(WIDTH, HEIGHT, NAME, this);
+		handler = new Handler();
+		
+		this.addKeyListener(new KeyInput(handler));
+		
+		handler.addObject(new Player(WIDTH/2 - 50, HEIGHT/2 - 50, ID.Player));
 	}
 	
 	public synchronized void start() {
@@ -74,7 +81,7 @@ public class Game extends Canvas implements Runnable {
 	}
 
 	private void tick() {
-		
+		handler.tick();
 	}
 	
 	private void render() {
@@ -88,6 +95,9 @@ public class Game extends Canvas implements Runnable {
 		
 		g.setColor(Color.black);
 		g.fillRect(0, 0, WIDTH, HEIGHT);
+		
+		handler.render(g);
+		
 		g.dispose();
 		bs.show();
 	}
