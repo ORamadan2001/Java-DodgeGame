@@ -5,15 +5,17 @@ import java.util.LinkedList;
 
 public class Handler {
 
+	// Linked list to contain all game objects so they can be rendered and ticked when the handler is called.
 	LinkedList<GameObject> objects = new LinkedList<GameObject>();
-	Player player = null;
 	
 	public void tick() {
 		for (int i = 0; i < objects.size(); i++) {
 			
+			// Tick every object in the linkedList.
 			GameObject obj = objects.get(i);
 			obj.tick();
 			
+			//Check if object is a hazard outside window bounds, if so, remove it from the handler.
 			if (obj.id == ID.Hazard) {
 				if (obj.x < 0 - obj.size || obj.x > Game.WIDTH + obj.size || 
 						obj.y < 0 - obj.size || obj.y > Game.HEIGHT + obj.size) {
@@ -32,9 +34,6 @@ public class Handler {
 	
 	public void addObject(GameObject obj) {
 		objects.add(obj);
-		if (obj.id == ID.Player) {
-			player = (Player) obj;
-		}
 	}
 	
 	public void removeObject(GameObject obj) {
@@ -44,9 +43,5 @@ public class Handler {
 	public int size() {
 		return objects.size();
 	};
-	
-	public void collision() {
-		
-	}
 	
 }

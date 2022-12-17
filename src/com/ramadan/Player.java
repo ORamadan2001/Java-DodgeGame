@@ -11,6 +11,17 @@ public class Player extends GameObject {
 	private HUD hud;
 	private long lastCollision;
 
+	/**
+	 * Create a player object
+	 * @param x X position of the top left corner of the game object relative to the Window.
+	 * @param y Y position of the top left corner of the game object relative to the Window.
+	 * @param size Size of the object.
+	 * @param minSpeed Minimum speed the object can have
+	 * @param maxSpeed Maximum speed the object can have
+	 * @param id enum to identify if object is a player or a hazard.
+	 * @param handler handler for collision detection
+	 * @param hud hud HUD to decrement lives value
+	 */
 	public Player(int x, int y, int size, int minSpeed, int maxSpeed, ID id, Handler handler, HUD hud) {
 		super(x, y, size, minSpeed, maxSpeed, id);
 		this.handler = handler;
@@ -46,6 +57,9 @@ public class Player extends GameObject {
 		g.fillOval(x, y, size, size);
 	}
 	
+	/**
+	 * Check if a collision has occurred and detect life loss if there has been a collision.
+	 */
 	public void checkCollision() {
 		
 		for (int i = 0; i < handler.size(); i++) {

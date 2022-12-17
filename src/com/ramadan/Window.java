@@ -9,6 +9,13 @@ public class Window extends Canvas {
 
 	private static final long serialVersionUID = 1801082051932126532L;
 
+	/**
+	 * Create a non resizable basic window that can contain a game instance.
+	 * @param width Width of the Window
+	 * @param height Height of the Window
+	 * @param title Title to set the Window to
+	 * @param game Game Object for the window to contain
+	 */
 	public Window(int width, int height, String title, Game game) {
 		JFrame frame = new JFrame(title);
 		
